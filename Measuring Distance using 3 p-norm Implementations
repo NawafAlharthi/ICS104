@@ -1,0 +1,37 @@
+#Import square root function 
+from math import sqrt 
+
+#Ask the user to enter the norm name 
+norm_name = input("Enter desired norm name (infinity, 1-norm, 2-norm): ").upper().strip()
+
+if norm_name != "1-NORM" and norm_name != "2-NORM" and norm_name != "INFINITY":
+    print("Error: unknown norm")
+
+else:
+    #Asking the user to enter the values of (x1,y1,x2,y2)
+    x1 = input("Enter value of coordinate value x1: ")
+    y1 = input("Enter value of coordinate value y1: ")
+    x2 = input("Enter value of coordinate value x2: ")
+    y2 = input("Enter value of coordinate value y2: ")
+    #Making a condition that make sure that the values are valid
+    if not(x1.isnumeric()) or not(y1.isnumeric()) or not(x2.isnumeric()) or not(y2.isnumeric()):
+        print("Not valid values")
+    else:
+        x1 = float(x1)
+        y1 = float(y1)
+        x2 = float(x2)
+        y2 = float(y2)
+
+    #norm_name = 1-norm condition 
+        if norm_name == "1-NORM":
+            #Calculate the distance using the metrics of 1-norm
+            distance = abs((x1-x2)) + abs((y1-y2))
+            print("1-norm distance value = ", round(distance,2))
+        elif norm_name == "2-NORM":
+            #Calculate the distance using the metrics of 2-norm 
+            distance = sqrt((x1-x2)**2 + (y1-y2)**2)
+            print("2-norm distance value = ", round(distance,2))
+        elif norm_name == "INFINITY": 
+            #Calculate the distance using the metrics of 2-norm 
+            distance = max(abs(x1-x2),abs(y1-y2))
+            print("infinity distance value = ", round(distance,2))
