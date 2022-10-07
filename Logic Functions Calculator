@@ -23,7 +23,7 @@ if LO == "NOT":
         print("Erorr: either A is not a digit, has more than one digit, or is out of the 0,1 range")
 
 
-if LO in valid_LO:
+elif LO in valid_LO:
     #User input 
     condition_A = input("Enter value of condition A: ")
     condition_B = input("Enter value of condition B: ")
