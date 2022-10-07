@@ -3,55 +3,64 @@
 #logical operators = LO
 #Range of numbers = RN
 
-#Setting the valid list of inputs 
+#Setting the valid lists of inputs
 valid_LO = ["AND","OR"]
 valid_RN = ["0","1"]
 
-#Inputs 
-LO = input("Enter logic function name (and, or, not): ").upper() #logical operators = LO
+#Ask the user to enter the desired logical operator 
+LO = input("Enter logic function name (and, or, not): ").upper().strip() #logical operators = LO
 
 #Not logical operator 
 if LO == "NOT":
-    #User input 
+    #Ask the user to enter the value of condition A
     condition_A = input("Enter value of condition A: ")
+    #Check if the condition A is in the valid range of numbers 
     if condition_A in valid_RN:
+        #If the value entered by the user for condition A = 1 ; print 0 , otherwise print 1.
         if condition_A == "1":
-            print("0")
+            print('"not" logic function result = 0')
         else:
-            print("1")
+            print('"not" logic function result = 1')
+    #If the user entered a number other than 0 or 1 ; represent the following erorr message.
     else:
         print("Erorr: either A is not a digit, has more than one digit, or is out of the 0,1 range")
-
-
+        
+#checking if the user entered on of the components of the valid_LO(Logical operators)
 elif LO in valid_LO:
-    #User input 
+    #Asking the user to enter the value of Condition A and B 
     condition_A = input("Enter value of condition A: ")
     condition_B = input("Enter value of condition B: ")
     #Conditions validation 
-    if condition_A in valid_RN: #Check if A is in the valid range. RN: Range of numbers 
-        if condition_B in valid_RN: #Check if A is in the valid range.
-            if LO == "AND": #And logical operator 
+    #Check if A is in the valid range. RN: Range of numbers 
+    if condition_A in valid_RN: 
+        #Check if B is in the valid range.
+        if condition_B in valid_RN:
+            #And logical operator 
+            if LO == "AND":
                 #True&True condition 
                 if condition_A != "0":
                     if condition_B != "0":
                         if condition_A == condition_B:
-                            print("1")
+                            print('"and" logic function result = 1')
                     #Not true&true condition 
                     else:
-                        print("0")
+                        print('"and" logic function result = 0')
                 else:
-                    print("0")
-            
-            elif LO == "OR": #And logical operator 
+                    print('"and" logic function result = 0')
+            #And logical operator
+            elif LO == "OR":  
                 #False&false condition 
                 if condition_A == 0:
                     if condition_B == 0: 
-                         print("0")
+                         print("'or' logic function result = 0")
+                #if there are difference between A and B then it is obiously the porgram should print 1 (true)
                 else:
-                    print("1")
+                    print('"or" logic function result = 1')
+        #If the user entered a number out of the valid range then print the following erorr message
         else: 
             print("Erorr: either B is not a digit, has more than one digit, or is out of the 0,1 range")
     else:
         print("Erorr: either A is not a digit, has more than one digit, or is out of the 0,1 range")
+#If the user entered a logical operator not included defined ; represent the following error message 
 else: 
     print("Error: unknown logic function")
