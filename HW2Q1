@@ -1,0 +1,26 @@
+##
+# This program reads some text from the user and counts each letter regardless of its case(upper or lower).
+#
+#
+
+user_input = input("Enter text: ").strip().lower() #Taking the input from the user 
+letter_count = "" #Initialization of the string output
+counter = 0 #Setting a counter to make the program distinguish and give the right response
+
+
+for i in user_input: #For loop to go through the user input 
+    if i.isalpha(): 
+        counter+=1
+    if i.isalpha(): #if condition that thats ignore non alphabetic literals (#$%^&*...)
+        num = user_input.count(i) #Counting the number of character repetition
+        if num !=0 : #This extra condition is to remove the overlaping
+            user_input = user_input.replace(i,"")
+            letter_count += str(i) + ":" +str(num)+","
+        
+
+if counter > 0:
+    letter_count = letter_count[:len(letter_count)-1:]
+    print("["+letter_count+"]")
+    
+if counter ==0: #The case of entering no alphabetic literals or empty input 
+    print("your text does not contain any letter")
