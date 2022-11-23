@@ -1,0 +1,64 @@
+##
+# This program checks if input string contain a vanilla array using for/while loop.
+#
+
+user_input = 0 #Initialization of the user input, it is does not make diff if it went through the while loop.
+
+while user_input !="": #While loop so that the user can iterate through the process and can get out by entring nothing 
+    user_input = input("Enter the array as string or Empty string to exits: ").strip() #Re-assigning user input 
+    user_input = user_input.replace(" ", "")
+    counter = 0
+    if user_input != "": #Check that the user entered the right value to enter the iteration 
+        if not "-" in user_input: #For postive number case 
+                if len(user_input)>1 and user_input[0] =="{" and user_input[len(user_input)-1] =="}": #Condition to check the validity of the input 
+                    user_input = user_input.replace("{","") #Remove the "{}" for easier process 
+                    user_input = user_input.replace("}","") 
+                    if len(user_input) > 0: #Check after removing the {} if it is bigger than or equal zero 
+                        for i in user_input: #For loop to go through the input array 
+                            if i.isdigit() and i == user_input[0]: #A good condition to check if the elments in the array are identiacal or not
+                                counter +=1 
+                            elif ",," in user_input: #A condtion "In case" we have a double comma in the input 
+                                counter -=1
+                        user_input_1 = user_input #Setting a copy for the input for futher usage 
+                        user_input= user_input.replace(",","") #Removing the commas for the input so it is easier to process 
+                        if user_input_1[len(user_input_1)-1] == ",": #This condition is when we have the case of having extra comma at the end, which implies that it is not identical array
+                            print("The string does not contain a valid or a vanilla array")
+
+                        elif counter== len(user_input): #This condition (Counter = the length of the user input after the changes) implies that we have identical elments in the array
+                            print("The string contains a valid vanilla array.")
+                        else:
+                            print("The string does not contain a valid or a vanilla array")
+
+                    else: #This condition is when the input after delting the {} is equal zero, which implies that it is empty array
+                        print("The string does not contain a valid or a vanilla array")
+                        user_input = "{}" #Re-assign the value for input at that case, so that we do not go out of the while loop 
+                else: #Check if the input is in a correct array's structure 
+                    print("The string does not contain a valid or a vanilla array")
+                    
+#These line of code are doing the same fucntion of the previous ones, the only difference is the consideration of negative sign
+        elif "-" in user_input:
+                user_input = user_input.replace("-","")
+                counter = 0 
+                if len(user_input)>1 and user_input[0] =="{" and user_input[len(user_input)-1] =="}": 
+                    user_input = user_input.replace("{","")
+                    user_input = user_input.replace("}","")
+                    if len(user_input) > 0:
+                        for i in user_input:
+                            if i.isdigit() and i == user_input[0]:
+                                counter +=1
+                            elif ",," in user_input:
+                                counter -=1
+                        user_input_1 = user_input 
+                        user_input= user_input.replace(",","")
+                        if user_input_1[len(user_input_1)-1] == ",":
+                            print("The string does not contain a valid or a vanilla array")
+                        elif counter == len(user_input):
+                            print("The string contains a valid vanilla array.")
+                        else:
+                            print("The string does not contain a valid or a vanilla array")
+
+                    else: 
+                        print("The string does not contain a valid or a vanilla array")
+                        user_input = "{}"
+                else: 
+                    print("The string does not contain a valid or a vanilla array")
