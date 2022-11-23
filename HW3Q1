@@ -1,76 +1,114 @@
-# YOUR CODE HERE
+#
+## A program that add a dict of phones info by the user and manipulate with it as the user request 
+#
+#
 
 def main():
-    print("To add a new phone device enter:")
-    phonesList = add_phones()
-    boxMaker(phonesList)
-    userMenu()
-    selected = input('     Enter your choice or "quit" to exit: ').strip()
+    print("To add a new phone device enter: ")
+    #Assigning the returned value from the add phones function to the phones list 
+    phones_dict = add_phones()
+    #The condition that make sure to not show the format of the table if there are no input entered by the user 
+    if phones_dict != {}: 
+        #Applying the phones dict to the box maker function  
+        box_maker(phones_dict)
+    #Excuting the function that play a rule in showing the user the menu and the commands that the program offer 
+    user_menu()
+    #The input that handle the choice selected by the user 
+    selected_choice = input('     Enter your choice or "quit" to exit: ').strip()
     
-    while selected != "quit":
-        if selected == "1": 
-            boxMaker(phonesList)
-            userMenu()
-            selected = input('     Enter your choice or "quit" to exit: ').strip()
+    #Loop for make the user have unlimited time of entering his choice, till s\he quit 
+    while selected_choice != "quit":
+        #The condition for the choice 1
+        if selected_choice == "1": 
+            #The condition that make sure to not show the format of the table if there are no input entered by the user
+            if phones_dict != {}: 
+                box_maker(phones_dict)
+            user_menu()
+            selected_choice = input('     Enter your choice or "quit" to exit: ').strip()
             
-        elif  selected == "2": 
-            selcetedSerialNumber = input("Enter the phone serial number: ").rstrip().lstrip()
-            serialNumberList = {}
-            if selcetedSerialNumber in phonesList:
-                for i in phonesList:
-                    if selcetedSerialNumber == i:
-                        serialNumberList[i] = phonesList[i]
-                boxMaker(serialNumberList)
-                
+        #The condition for the choice 2
+        elif  selected_choice == "2": 
+            #Taking the chosen serial number from the user 
+            selceted_serial_number = input("     Enter the phone serial number: ").rstrip().lstrip()
+            #Initlizing and empty dict for later use
+            serial_number_list = {}
+            #A condition to extract the information related to what the user entered 
+            if selceted_serial_number in phones_dict:
+                #For loop to go throw the keys of phones dict 
+                for i in phones_dict:
+                    #Check similarity between the key and the entered serial number by the user 
+                    if selceted_serial_number == i:
+                        #Assinging the extracted information to the dict made previously 
+                        serial_number_list[i] = phones_dict[i]
+                #The condition that make sure to not show the format of the table if there are no input entered by the user
+                if phones_dict != {}: 
+                    box_maker(serial_number_list)
+            #Message shown up if the user enterd a serial number that does not exist in the dict 
             else: 
-                print(selcetedSerialNumber, "is not available")
+                print("Device not found.")
                 
-            userMenu()
-            selected = input('     Enter your choice or "quit" to exit: ').strip()
+            user_menu()
+            selected_choice = input('     Enter your choice or "quit" to exit: ').strip()
             
-        elif  selected == "3": 
-            
-            selcetedPhoneBrand = input("Enter the phone brand: ").strip()
-            phoneBrandList = {}
+        #The condition for the choice 2
+        elif  selected_choice == "3": 
+            #Taking the chosen brand from the user 
+            selceted_phone_brand = input("     Enter the phone brand: ").strip()
+            #Initlizing and empty dict for later use
+            phone_brand_list = {}
+            #Setting a counter that count the number of loops excuted to relate it to the number of index or positions for later use
             counter = 0 
-            for i in range(len(phonesList)): 
-                if selcetedPhoneBrand in list(phonesList.values())[i]:
+            for i in range(len(phones_dict)): 
+                #The main idea of this part is to extract the values of dict and then convet it to a list and then assing the the index tp it, so that we have the brand from the dict
+                if selceted_phone_brand in list(phones_dict.values())[i]:
+                    #Increase the counter by one, to know the number index numbers 
                     counter = 1+counter 
-                    
+            #If we have number more than one, that means that we have a true or matching in the loop, which state that we have a phone that has what we want
             if counter > 0: 
                 counter = 0 
-                for i in phonesList: 
-                    if selcetedPhoneBrand in list(phonesList.values())[counter]:
-                        phoneBrandList[i] = phonesList[i]
+                #Loop to go throw the keys of dict 
+                for i in phones_dict: 
+                    #Matching to extract the wanted info 
+                    if selceted_phone_brand in list(phones_dict.values())[counter]:
+                        #Assigining for the new dict 
+                        phone_brand_list[i] = phones_dict[i]
                     counter = counter + 1
-                boxMaker(phoneBrandList)
-
+                #The condition that make sure to not show the format of the table if there are no input entered by the user
+                if phones_dict != {}: 
+                    box_maker(phone_brand_list)
+            #Message shown up if the user enterd a brand that does not exist in the dict 
             else: 
-                print(selcetedPhoneBrand, "is not available")
+                print(selceted_phone_brand, "brand is not available")
                 
-            userMenu()
-            selected = input('     Enter your choice or "quit" to exit: ').strip()
-            
+            user_menu()
+            selected_choice = input('     Enter your choice or "quit" to exit: ').strip()
+        #The condition where the user enterd invlaid input 
         else:
             print("     Wrong input")
             print()
-            userMenu()
-            selected = input('     Enter your choice or "quit" to exit: ').strip()
+            user_menu()
+            selected_choice = input('     Enter your choice or "quit" to exit: ').strip()
     
 
 
-    
+#Function part 
+
+
 def add_phones():
-    phonesList = {}
-    userInput =input("Serial,brand,model,color,memory:")
-    while userInput != "":
-        userInput = userInput.split(",")
-        phonesList[userInput[0]] = userInput[1:]
-        userInput = input("add another phone or press Enter to finish: ")
-    return phonesList 
+    phones_dict = {}
+    user_input =input("Serial,brand,model,color,memory: ")
+    #The condition that quit the input phase by pressing ENTER
+    while user_input != "":
+        #Spliting the entered input for easier process 
+        user_input = user_input.split(",")
+        #Organizing the entered values in the dict 
+        phones_dict[user_input[0]] = user_input[1:]
+        #Retaking the input from the user and add it to the dict 
+        user_input = input("add another phone or press Enter to finish: ")
+    return phones_dict
 
-def boxMaker(list1):
-
+def box_maker(list1):
+    #Here we make sure that the tabular format is correct by using basic process and string formatting 
     print("-" * 90)
     print("%-20s %-20s %-20s %-20s %s"% ("Phone Serial", "brand", "model", "color", "memory"))
     print("-" * 90)
@@ -82,9 +120,10 @@ def boxMaker(list1):
         memory = list1[i][3]
         print ("%-20s %-20s %-20s %s"% (brand, model, color, memory))
 
-def userMenu():
+def user_menu():
+    #To show the user the main menu 
     print()
-    print("%20s" % "*User Menu*")
+    print("%20s" % "**User Menu**")
     print("1 - Print all phones data in a tabular format \n2 - Print phones information based on the phone serial number \n3 - Print phones information based on brand")
         
 main()
