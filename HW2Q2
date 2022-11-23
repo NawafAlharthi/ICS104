@@ -1,0 +1,66 @@
+
+##
+# This program converts an integer number with any base into a base 10 number using for or while loop.
+#
+
+user_number = input("Enter a number: ").strip() #Asking the user for input 
+counter = 0 #Setting a counter so that we can use it for loops 
+calculated_base_number = 0 #Setting a container to sum the values 
+
+if "-" in user_number: #If the entered value is a negative value, then we have to consider some extra steps
+    user_number = user_number.replace("-","") #removing the negative sign for easier calculations 
+    if user_number.isdigit(): #if condition to make sure if it is a number 
+        user_base = input("Base: ") #Taking the base input from the user 
+        if user_base.isdigit(): #Check if the base is valid 
+            for i in user_number: #For loop to go through the user entered number 
+                if i >= user_base: #This condtion is to check that the base is legal for our calculations 
+                    counter+=1
+
+            if counter > 0 :  #This condtion is to check that the base is legal for our calculations 
+                print("The input number is not a legal number of base", user_base)
+
+            elif counter ==0 : #The condition which implies that our base is valid 
+                print("The number in base 10:")
+                for i in range(len(user_number)): #For loop to keep printing our required oputput reptitvely 
+                    print("(-"+str(user_number[len(user_number)-1-i]),"X", str(int(user_base)**int(i))+")", end = " ")
+                    if i != len(user_number)-1:
+                        print("+", end = " ")
+
+               
+                for i in range(len(user_number)): #For loop to sum all the results of multiplication 
+                    calculated_base_number += int(user_number[len(user_number)-1-i]) * int(user_base)**int(i)
+                print("=", "-"+str(calculated_base_number))
+    #Erorr conditions 
+        else: 
+            print("Erorr: the input value is not an integer number")
+    else: 
+        print("Erorr: the input value is not an integer number")
+    
+#These steps are identical to the previous ones, which is built for postive inputs.
+
+elif user_number.isdigit():
+    if user_number.isdigit():
+        user_base = input("Base: ")
+        if user_base.isdigit(): 
+            for i in user_number:
+                if i >= user_base:
+                    counter+=1
+
+            if counter > 0 :  
+                print("The input number is not a legal number of base", user_base)
+
+            elif counter ==0 : 
+                print("The number in base 10:")
+                for i in range(len(user_number)):
+                    print("("+str(user_number[len(user_number)-1-i]),"X", str(int(user_base)**int(i))+")", end = " ")
+                    if i != len(user_number)-1:
+                        print("+", end = " ")
+
+                for i in range(len(user_number)):
+                    calculated_base_number += int(user_number[len(user_number)-1-i]) * int(user_base)**int(i)
+                print("= ", calculated_base_number)
+                
+        else: 
+            print("Erorr: the input value is not an integer number")
+else: 
+    print("Erorr: the input value is not an integer number")
