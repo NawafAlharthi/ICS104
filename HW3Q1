@@ -1,0 +1,90 @@
+# YOUR CODE HERE
+
+def main():
+    print("To add a new phone device enter:")
+    phonesList = add_phones()
+    boxMaker(phonesList)
+    userMenu()
+    selected = input('     Enter your choice or "quit" to exit: ').strip()
+    
+    while selected != "quit":
+        if selected == "1": 
+            boxMaker(phonesList)
+            userMenu()
+            selected = input('     Enter your choice or "quit" to exit: ').strip()
+            
+        elif  selected == "2": 
+            selcetedSerialNumber = input("Enter the phone serial number: ").rstrip().lstrip()
+            serialNumberList = {}
+            if selcetedSerialNumber in phonesList:
+                for i in phonesList:
+                    if selcetedSerialNumber == i:
+                        serialNumberList[i] = phonesList[i]
+                boxMaker(serialNumberList)
+                
+            else: 
+                print(selcetedSerialNumber, "is not available")
+                
+            userMenu()
+            selected = input('     Enter your choice or "quit" to exit: ').strip()
+            
+        elif  selected == "3": 
+            
+            selcetedPhoneBrand = input("Enter the phone brand: ").strip()
+            phoneBrandList = {}
+            counter = 0 
+            for i in range(len(phonesList)): 
+                if selcetedPhoneBrand in list(phonesList.values())[i]:
+                    counter = 1+counter 
+                    
+            if counter > 0: 
+                counter = 0 
+                for i in phonesList: 
+                    if selcetedPhoneBrand in list(phonesList.values())[counter]:
+                        phoneBrandList[i] = phonesList[i]
+                    counter = counter + 1
+                boxMaker(phoneBrandList)
+
+            else: 
+                print(selcetedPhoneBrand, "is not available")
+                
+            userMenu()
+            selected = input('     Enter your choice or "quit" to exit: ').strip()
+            
+        else:
+            print("     Wrong input")
+            print()
+            userMenu()
+            selected = input('     Enter your choice or "quit" to exit: ').strip()
+    
+
+
+    
+def add_phones():
+    phonesList = {}
+    userInput =input("Serial,brand,model,color,memory:")
+    while userInput != "":
+        userInput = userInput.split(",")
+        phonesList[userInput[0]] = userInput[1:]
+        userInput = input("add another phone or press Enter to finish: ")
+    return phonesList 
+
+def boxMaker(list1):
+
+    print("-" * 90)
+    print("%-20s %-20s %-20s %-20s %s"% ("Phone Serial", "brand", "model", "color", "memory"))
+    print("-" * 90)
+    for i in list1:
+        print(i,end = "                ")
+        brand = list1[i][0]
+        model = list1[i][1]
+        color = list1[i][2]
+        memory = list1[i][3]
+        print ("%-20s %-20s %-20s %s"% (brand, model, color, memory))
+
+def userMenu():
+    print()
+    print("%20s" % "*User Menu*")
+    print("1 - Print all phones data in a tabular format \n2 - Print phones information based on the phone serial number \n3 - Print phones information based on brand")
+        
+main()
